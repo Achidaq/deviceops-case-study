@@ -24,9 +24,10 @@ The first viewport is built for operational triage. It surfaces managed-device c
 2. The endpoint generates its own keypair and exchanges the one-time token for a revocable device identity.
 3. The agent sends bounded inventory and health heartbeats over HTTPS with replay-safe sequence numbers.
 4. The control plane persists telemetry, derives health, deduplicates threshold alerts, and records audited actions.
-5. Signed updates are released through canary, preview, and stable rings with deterministic device assignment.
-6. Each endpoint independently verifies the pinned key, P-256 signature, artifact size, and SHA-256 digest before a privileged helper applies it.
-7. A failed post-install self-test restores the previous agent package automatically.
+5. Operators can inspect per-device inventory, telemetry history, the complete alert timeline, and revoke compromised agent credentials.
+6. Signed updates are released through canary, preview, and stable rings with deterministic device assignment.
+7. Each endpoint independently verifies the pinned key, P-256 signature, artifact size, and SHA-256 digest before a privileged helper applies it.
+8. A failed post-install self-test restores the previous agent package automatically.
 
 ## System architecture
 
@@ -79,7 +80,7 @@ flowchart TB
 
 ## Verification
 
-The current checkpoint passes 21 automated tests across TypeScript control-plane contracts and Python agent behavior. Coverage includes schema boundaries, credentials, redirect refusal, sequence persistence, platform collectors, canonical signatures, tamper rejection, checksum validation, and rollback after a failed update self-test. The deployable Worker build also completes successfully.
+The current checkpoint passes 23 automated tests across TypeScript control-plane contracts and Python agent behavior. Coverage includes schema boundaries, safe inventory parsing, telemetry visualization, credentials, redirect refusal, sequence persistence, platform collectors, canonical signatures, tamper rejection, checksum validation, and rollback after a failed update self-test. The deployable Worker build also completes successfully.
 
 ## What this project demonstrates
 
@@ -91,7 +92,7 @@ The current checkpoint passes 21 automated tests across TypeScript control-plane
 
 ## Current status
 
-The monitoring foundation, three endpoint service adapters, enrollment and heartbeat APIs, and signed update path are implemented. Device detail history, credential-revocation UI, offline evaluation, notification routing, maintenance windows, and durable remote jobs are planned next. No claim is made that the demonstration represents a production customer fleet.
+The monitoring foundation, three endpoint service adapters, enrollment and heartbeat APIs, signed update path, device detail history, alert timeline, and credential-revocation UI are implemented. Offline evaluation, notification routing, maintenance windows, and durable remote jobs are planned next. No claim is made that the demonstration represents a production customer fleet.
 
 ## Source access
 

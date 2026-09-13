@@ -64,6 +64,7 @@ flowchart TB
 | Release trust | Sign canonical manifests offline with P-256 and pin public keys at enrollment | Separates release authority from artifact hosting |
 | Rollouts | Deterministic device buckets across canary, preview, and stable rings | Makes staged releases repeatable instead of randomly reshuffling devices |
 | Recovery | Atomic package swap followed by a CLI self-test and rollback | Preserves the last working agent after a bad release |
+| Integration testing | Apply every migration to a local D1 emulator with paired tenant fixtures | Exercises isolation, maintenance suppression, and outbox idempotency against the deployed database interface |
 
 ## Security posture
 
@@ -82,7 +83,7 @@ flowchart TB
 
 ## Verification
 
-The current checkpoint passes 26 automated tests across TypeScript control-plane contracts and Python agent behavior. Coverage includes schema boundaries, safe inventory parsing, telemetry visualization, severity routing, destination masking, offline thresholds, credentials, redirect refusal, sequence persistence, platform collectors, signatures, checksum validation, and rollback. The deployable Worker build also completes successfully.
+The current checkpoint passes 30 automated tests across TypeScript control-plane contracts, local D1 integration scenarios, and Python agent behavior. Coverage includes migration application, cross-tenant negative cases, maintenance suppression, notification-outbox idempotency, schema boundaries, safe inventory parsing, telemetry visualization, credentials, redirect refusal, sequence persistence, platform collectors, signatures, checksum validation, and rollback. The deployable Worker build also completes successfully.
 
 ## What this project demonstrates
 
@@ -94,7 +95,7 @@ The current checkpoint passes 26 automated tests across TypeScript control-plane
 
 ## Current status
 
-The monitoring foundation, three endpoint service adapters, enrollment and heartbeat APIs, signed updates, device history, credential revocation, offline evaluation, maintenance windows, alert comments, and notification outbox are implemented. Multi-tenant integration coverage, external notification workers, and durable remote jobs are planned next. No claim is made that the demonstration represents a production customer fleet.
+The monitoring foundation, three endpoint service adapters, enrollment and heartbeat APIs, signed updates, device history, credential revocation, offline evaluation, maintenance windows, alert comments, notification outbox, and local D1 multi-tenant integration suite are implemented. External notification workers and durable remote jobs are planned next. No claim is made that the demonstration represents a production customer fleet.
 
 ## Source access
 

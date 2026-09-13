@@ -25,9 +25,11 @@ The first viewport is built for operational triage. It surfaces managed-device c
 3. The agent sends bounded inventory and health heartbeats over HTTPS with replay-safe sequence numbers.
 4. The control plane persists telemetry, derives health, deduplicates threshold alerts, and records audited actions.
 5. Operators can inspect per-device inventory, telemetry history, the complete alert timeline, and revoke compromised agent credentials.
-6. Signed updates are released through canary, preview, and stable rings with deterministic device assignment.
-7. Each endpoint independently verifies the pinned key, P-256 signature, artifact size, and SHA-256 digest before a privileged helper applies it.
-8. A failed post-install self-test restores the previous agent package automatically.
+6. Missed heartbeats transition enrolled devices offline, while scoped maintenance windows preserve alerts and suppress matching notification deliveries.
+7. Severity-aware email and webhook routes write deduplicated work to a durable notification outbox, and operators can add attributed alert comments.
+8. Signed updates are released through canary, preview, and stable rings with deterministic device assignment.
+9. Each endpoint independently verifies the pinned key, P-256 signature, artifact size, and SHA-256 digest before a privileged helper applies it.
+10. A failed post-install self-test restores the previous agent package automatically.
 
 ## System architecture
 
@@ -80,7 +82,7 @@ flowchart TB
 
 ## Verification
 
-The current checkpoint passes 23 automated tests across TypeScript control-plane contracts and Python agent behavior. Coverage includes schema boundaries, safe inventory parsing, telemetry visualization, credentials, redirect refusal, sequence persistence, platform collectors, canonical signatures, tamper rejection, checksum validation, and rollback after a failed update self-test. The deployable Worker build also completes successfully.
+The current checkpoint passes 26 automated tests across TypeScript control-plane contracts and Python agent behavior. Coverage includes schema boundaries, safe inventory parsing, telemetry visualization, severity routing, destination masking, offline thresholds, credentials, redirect refusal, sequence persistence, platform collectors, signatures, checksum validation, and rollback. The deployable Worker build also completes successfully.
 
 ## What this project demonstrates
 
@@ -92,7 +94,7 @@ The current checkpoint passes 23 automated tests across TypeScript control-plane
 
 ## Current status
 
-The monitoring foundation, three endpoint service adapters, enrollment and heartbeat APIs, signed update path, device detail history, alert timeline, and credential-revocation UI are implemented. Offline evaluation, notification routing, maintenance windows, and durable remote jobs are planned next. No claim is made that the demonstration represents a production customer fleet.
+The monitoring foundation, three endpoint service adapters, enrollment and heartbeat APIs, signed updates, device history, credential revocation, offline evaluation, maintenance windows, alert comments, and notification outbox are implemented. Multi-tenant integration coverage, external notification workers, and durable remote jobs are planned next. No claim is made that the demonstration represents a production customer fleet.
 
 ## Source access
 
